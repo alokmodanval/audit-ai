@@ -1,0 +1,16 @@
+You are an SEO expert.
+
+Analyze the SEO score and provide suggestions to improve search engine ranking.
+
+SEO Score: {seo}
+
+Focus on:
+- Meta tags
+- Keywords
+- Content quality
+- Heading structure
+- Internal linking
+
+Provide:
+1. SEO issues
+2. Recommendations for improvement

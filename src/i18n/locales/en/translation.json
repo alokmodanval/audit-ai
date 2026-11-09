@@ -1,0 +1,90 @@
+{
+  "nav": {
+    "brand": "Audit",
+    "brandHighlight": "AI",
+    "home": "Home",
+    "audit": "Website Audit",
+    "compare": "Compare",
+    "trust": "Trust Shield",
+    "tech": "Tech Stack",
+    "history": "History",
+    "about": "About",
+    "cta": "Quick Scan"
+  },
+  "hero": {
+    "badge": "⚡ AI-Powered Website Intelligence Suite",
+    "titlePrefix": "Audit, Optimize & Secure Any",
+    "titleGradient": "Website in Seconds",
+    "subtitle": "Comprehensive edge-speed analysis for Performance, SEO, Security Headers, WCAG Accessibility, and Phishing/Trust verification with actionable AI fixes.",
+    "inputPlaceholder": "Enter website URL (e.g. https://stripe.com or google.com)",
+    "auditButton": "Start Deep Audit",
+    "quickAudits": "Popular Sites to Test:",
+    "sampleWikipedia": "Wikipedia",
+    "sampleGithub": "GitHub",
+    "sampleStripe": "Stripe",
+    "sampleCloudflare": "Cloudflare"
+  },
+  "scores": {
+    "overall": "Overall Health",
+    "performance": "Performance",
+    "seo": "SEO Health",
+    "accessibility": "Accessibility",
+    "security": "Security Shield",
+    "trust": "Trust & Safety",
+    "tech": "Technologies",
+    "carbon": "Eco Footprint",
+    "grade": "Health Grade",
+    "excellent": "Excellent",
+    "good": "Good",
+    "needsImprovement": "Needs Attention",
+    "poor": "Poor"
+  },
+  "audit": {
+    "title": "Audit Command Center",
+    "scanning": "Scanning Target URL...",
+    "steps": {
+      "dns": "Resolving DNS & Network Latency",
+      "ssl": "Inspecting SSL/TLS & Security Certificates",
+      "dom": "Parsing DOM & WCAG Accessibility Hierarchy",
+      "seo": "Evaluating Meta Tags, OpenGraph & Indexability",
+      "ai": "Synthesizing AI Diagnosis & Fix Generator"
+    },
+    "tabs": {
+      "overview": "Overview",
+      "performance": "Performance",
+      "seo": "SEO",
+      "security": "Security",
+      "accessibility": "Accessibility",
+      "trust": "Trust Shield",
+      "tech": "Tech Stack",
+      "aiDoctor": "AI Doctor"
+    },
+    "actions": {
+      "exportPdf": "Export PDF Report",
+      "exportJson": "Export JSON",
+      "share": "Share Report",
+      "reAudit": "Re-run Audit",
+      "compare": "Compare with Competitor"
+    },
+    "explainWithAi": "Explain with AI",
+    "generateFix": "Get Code Fix"
+  },
+  "common": {
+    "loading": "Analyzing...",
+    "error": "Error",
+    "success": "Success",
+    "passed": "Passed",
+    "warning": "Warning",
+    "failed": "Critical",
+    "close": "Close",
+    "copy": "Copy",
+    "copied": "Copied!"
+  },
+  "footer": {
+    "description": "Next-generation AI website audit and trust intelligence tool built with high performance, edge architecture, and modern UX.",
+    "links": "Quick Links",
+    "tools": "Features",
+    "legal": "Legal & Privacy",
+    "rights": "All rights reserved. Powered by Edge Workers."
+  }
+}

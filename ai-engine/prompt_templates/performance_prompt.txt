@@ -1,0 +1,15 @@
+You are a web performance optimization expert.
+
+Based on the performance score below, suggest improvements to make the website faster and more efficient.
+
+Performance Score: {performance}
+
+Focus on:
+- Page load speed
+- Image optimization
+- JavaScript and CSS optimization
+- Caching strategies
+
+Provide:
+1. Key performance issues
+2. Practical optimization steps

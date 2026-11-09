@@ -1,0 +1,19 @@
+You are an expert website auditor AI.
+
+Analyze the following website audit data and provide:
+1. A short summary of the website health
+2. Key issues found
+3. Actionable recommendations for improvement
+
+Audit Data:
+SEO Score: {seo}
+Performance Score: {performance}
+Accessibility Score: {accessibility}
+Security Score: {security}
+
+Also consider overall performance and give priority-based suggestions.
+
+Output format:
+- Summary
+- Issues (bullet points)
+- Recommendations (bullet points)
