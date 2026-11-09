@@ -33,9 +33,12 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
       <div className="fixed inset-y-0 right-0 w-full max-w-xs bg-white dark:bg-surface-900 p-6 shadow-xl flex flex-col justify-between border-l border-surface-200 dark:border-surface-800">
         <div>
           <div className="flex items-center justify-between pb-6 border-b border-surface-200 dark:border-surface-800">
-            <span className="text-xl font-bold tracking-tight text-surface-900 dark:text-white">
-              Audit<span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-accent-500">AI</span>
-            </span>
+            <div className="flex items-center gap-2">
+              <img src="/logo.png" alt="Audit AI" className="w-7 h-7 rounded-lg object-cover" />
+              <span className="text-xl font-bold tracking-tight text-surface-900 dark:text-white">
+                Audit<span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-accent-500">AI</span>
+              </span>
+            </div>
             <button
               onClick={onClose}
               className="p-2 rounded-lg text-surface-500 hover:bg-surface-100 dark:text-surface-400 dark:hover:bg-surface-800"

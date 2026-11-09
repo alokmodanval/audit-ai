@@ -47,11 +47,11 @@ const Navbar: React.FC = () => {
                 to="/" 
                 className="flex items-center gap-2.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 rounded-md group"
               >
-                <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-primary-600 to-accent-500 flex items-center justify-center text-white shadow-sm shadow-primary-500/20 group-hover:scale-105 transition-transform">
-                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                </div>
+                <img 
+                  src="/logo.png" 
+                  alt="Audit AI" 
+                  className="w-8 h-8 rounded-lg object-cover shadow-sm shadow-primary-500/20 group-hover:scale-105 transition-transform" 
+                />
                 <span className="text-xl font-bold tracking-tight text-surface-900 dark:text-white">
                   Audit<span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-accent-500">AI</span>
                 </span>
