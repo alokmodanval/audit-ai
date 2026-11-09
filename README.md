@@ -10,7 +10,8 @@
 
 Designed with the **Tools4Genz UI Design System**, equipped with bilingual support (English & Hindi), dark/light themes, and built for instant deployment on **Cloudflare Pages & Edge Functions**.
 
-🌐 **Live Production Deployment:** [https://audit-ai-98b.pages.dev](https://audit-ai-98b.pages.dev)
+🌐 **Custom Domain:** [https://audit-ai.tools4genz.com](https://audit-ai.tools4genz.com)  
+🌐 **Pages Direct URL:** [https://audit-ai-98b.pages.dev](https://audit-ai-98b.pages.dev)
 
 ---
 
