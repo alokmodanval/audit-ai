@@ -64,7 +64,7 @@ const Footer: React.FC = () => {
             <ul className="space-y-2.5 text-sm">
               <li><Link to="/about" className="text-surface-500 hover:text-primary-600 dark:text-surface-400 dark:hover:text-primary-400 transition-colors">Methodology & Algorithms</Link></li>
               <li><a href="https://tools4genz.com" target="_blank" rel="noopener noreferrer" className="text-surface-500 hover:text-primary-600 dark:text-surface-400 dark:hover:text-primary-400 transition-colors flex items-center gap-1">Tools4Genz Suite ↗</a></li>
-              <li><a href="https://developers.cloudflare.com/pages/" target="_blank" rel="noopener noreferrer" className="text-surface-500 hover:text-primary-600 dark:text-surface-400 dark:hover:text-primary-400 transition-colors flex items-center gap-1">Cloudflare Edge Architecture ↗</a></li>
+              <li><Link to="/trust-shield" className="text-surface-500 hover:text-primary-600 dark:text-surface-400 dark:hover:text-primary-400 transition-colors">Trust & Scam Diagnostics</Link></li>
               <li><a href="https://github.com/alokmodanval/audit-ai" target="_blank" rel="noopener noreferrer" className="text-surface-500 hover:text-primary-600 dark:text-surface-400 dark:hover:text-primary-400 transition-colors flex items-center gap-1">Open Source on GitHub ↗</a></li>
             </ul>
           </div>
@@ -72,7 +72,7 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="pt-8 border-t border-surface-200 dark:border-surface-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-surface-500 dark:text-surface-400">
-          <p>© {new Date().getFullYear()} Audit AI. Created with Tools4Genz Design System. Deployed on Cloudflare.</p>
+          <p>© {new Date().getFullYear()} Audit AI. All rights reserved.</p>
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-1.5">
               <span>⚡</span> Fast Edge Runtime

@@ -87,10 +87,10 @@ const AboutPage: React.FC = () => {
 
           <Card variant="bordered" className="p-6 sm:p-8 space-y-4">
             <h2 className="text-xl font-bold text-surface-900 dark:text-white">
-              ☁️ Cloudflare Global Edge Deployment
+              ☁️ Global Edge Architecture
             </h2>
             <p className="text-sm text-surface-600 dark:text-surface-300 leading-relaxed">
-              Audit AI is compiled as an ultra-lean single-page application and deployed onto Cloudflare's global edge network. Audits execute with minimal latency directly close to the user without backend bottlenecks.
+              Audit AI is compiled as an ultra-lean single-page application and deployed onto an ultra-fast global edge network. Audits execute with minimal latency directly close to the user without backend bottlenecks.
             </p>
             <div className="pt-2">
               <Button href="/audit" variant="primary">

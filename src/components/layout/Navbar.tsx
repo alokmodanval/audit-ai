@@ -55,9 +55,6 @@ const Navbar: React.FC = () => {
                 <span className="text-xl font-bold tracking-tight text-surface-900 dark:text-white">
                   Audit<span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-accent-500">AI</span>
                 </span>
-                <span className="hidden sm:inline-flex px-1.5 py-0.5 text-[10px] font-semibold bg-primary-100 text-primary-700 dark:bg-primary-950/60 dark:text-primary-300 rounded border border-primary-200 dark:border-primary-800/60 uppercase tracking-wider">
-                  Edge v2
-                </span>
               </NavLink>
 
               <nav className="hidden xl:flex items-center gap-1 ml-4">
