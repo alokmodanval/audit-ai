@@ -51,6 +51,7 @@
     },
     "tabs": {
       "overview": "Overview",
+      "about": "About Site (AI)",
       "performance": "Performance",
       "seo": "SEO",
       "security": "Security",

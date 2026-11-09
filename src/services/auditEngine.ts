@@ -9,7 +9,8 @@ import {
   CarbonData, 
   AiDoctorData,
   AuditMetric,
-  AiIssue
+  AiIssue,
+  WebsiteIntelligence
 } from '@/types/audit';
 
 export function normalizeUrl(rawUrl: string): string {
@@ -533,6 +534,25 @@ export async function runWebsiteAudit(
     ]
   };
 
+  const rawBrand = domain.replace(/^www\./, '').split('.')[0];
+  const fallbackName = rawBrand.charAt(0).toUpperCase() + rawBrand.slice(1);
+
+  const websiteIntelligence: WebsiteIntelligence = serverData?.websiteIntelligence || {
+    name: fallbackName,
+    tagline: h1List[0] || (seoTitle.length > 5 ? seoTitle : `Official web presence for ${domain}`),
+    category: isHttps ? 'Web Application & Services' : 'Digital Platform',
+    summary: `${fallbackName} is an active web platform on ${domain} providing specialized services and content.`,
+    whatItDoes: seoMetaDesc && seoMetaDesc.length > 25
+      ? `${fallbackName} is an online platform. Its core purpose is to ${seoMetaDesc.charAt(0).toLowerCase() + seoMetaDesc.slice(1)}`
+      : `${fallbackName} (${domain}) serves online visitors with digital content, web tools, or platform capabilities.`,
+    targetAudience: 'Global internet users and digital visitors',
+    businessModel: 'Online Platform / Digital Services',
+    coreOfferings: ['Digital Content & Media', 'Responsive Web Experience', 'Interactive Navigation', 'Secure Web Delivery'],
+    primaryNiche: 'Technology & Web Services',
+    isCommercial: false,
+    keyKeywords: h1List.slice(0, 5)
+  };
+
   const report: FullAuditReport = {
     id: `audit_${Date.now()}_${Math.floor(Math.random() * 1000)}`,
     url,
@@ -547,7 +567,8 @@ export async function runWebsiteAudit(
     trust,
     techStack,
     carbon,
-    aiDoctor
+    aiDoctor,
+    websiteIntelligence
   };
 
   return report;

@@ -12,6 +12,7 @@ import ShareModal from '@/components/audit/ShareModal';
 import { runWebsiteAudit, normalizeUrl } from '@/services/auditEngine';
 import { historyStorage } from '@/services/historyStorage';
 import { FullAuditReport, AuditMetric } from '@/types/audit';
+import WebsiteIntelligenceCard from '@/components/audit/WebsiteIntelligenceCard';
 
 const AuditPage: React.FC = () => {
   const { t } = useTranslation();
@@ -23,7 +24,7 @@ const AuditPage: React.FC = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [stepText, setStepText] = useState('Initializing scan...');
   const [report, setReport] = useState<FullAuditReport | null>(null);
-  const [activeTab, setActiveTab] = useState<'overview' | 'performance' | 'seo' | 'security' | 'accessibility' | 'trust' | 'tech' | 'aiDoctor'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'about' | 'performance' | 'seo' | 'security' | 'accessibility' | 'trust' | 'tech' | 'aiDoctor'>('overview');
   
   // Modals state
   const [selectedMetric, setSelectedMetric] = useState<AuditMetric | null>(null);
@@ -191,7 +192,8 @@ const AuditPage: React.FC = () => {
             {/* Navigation Tabs */}
             <div className="border-b border-surface-200 dark:border-surface-800 flex overflow-x-auto gap-2 pb-px print:hidden">
               {[
-                { id: 'overview', label: 'Overview & AI Doctor', icon: '🩺' },
+                { id: 'overview', label: 'Overview & Health', icon: '📊' },
+                { id: 'about', label: 'About Site (AI)', icon: '🌐' },
                 { id: 'performance', label: 'Performance', icon: '⚡' },
                 { id: 'seo', label: 'SEO & Social', icon: '🔍' },
                 { id: 'security', label: 'Security & Headers', icon: '🔒' },
@@ -219,6 +221,14 @@ const AuditPage: React.FC = () => {
             {/* 1. OVERVIEW & AI DOCTOR TAB */}
             {activeTab === 'overview' && (
               <div className="space-y-6">
+                {/* Website Purpose & Business Intelligence */}
+                {report.websiteIntelligence && (
+                  <WebsiteIntelligenceCard 
+                    intelligence={report.websiteIntelligence} 
+                    domain={report.domain} 
+                  />
+                )}
+
                 {/* AI Executive Diagnosis */}
                 <Card variant="bordered" className="p-6 bg-gradient-to-br from-primary-500/10 via-surface-50 to-transparent dark:from-primary-950/40 dark:via-surface-900 dark:to-transparent border-primary-500/30">
                   <div className="flex items-center gap-2 mb-3">
@@ -330,6 +340,101 @@ const AuditPage: React.FC = () => {
                       </ul>
                     </Card>
                   </div>
+                </div>
+              </div>
+            )}
+
+            {/* ABOUT SITE (AI INTELLIGENCE) TAB */}
+            {activeTab === 'about' && (
+              <div className="space-y-6">
+                {report.websiteIntelligence && (
+                  <WebsiteIntelligenceCard 
+                    intelligence={report.websiteIntelligence} 
+                    domain={report.domain} 
+                  />
+                )}
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* Business & Functional Profile */}
+                  <Card variant="bordered" className="p-6">
+                    <h3 className="text-sm font-bold uppercase tracking-wider text-surface-900 dark:text-white mb-4 flex items-center justify-between">
+                      <span>Business & Functional Profile</span>
+                      <Badge variant="primary" size="sm">{report.websiteIntelligence?.category || 'Website'}</Badge>
+                    </h3>
+                    <dl className="space-y-3 text-xs">
+                      <div className="flex justify-between py-1.5 border-b border-surface-100 dark:border-surface-800">
+                        <dt className="text-surface-500 dark:text-surface-400">Website Name</dt>
+                        <dd className="font-semibold text-surface-900 dark:text-white">{report.websiteIntelligence?.name || report.domain}</dd>
+                      </div>
+                      <div className="flex justify-between py-1.5 border-b border-surface-100 dark:border-surface-800">
+                        <dt className="text-surface-500 dark:text-surface-400">Industry / Niche</dt>
+                        <dd className="font-semibold text-surface-900 dark:text-white">{report.websiteIntelligence?.primaryNiche || 'Web'}</dd>
+                      </div>
+                      <div className="flex justify-between py-1.5 border-b border-surface-100 dark:border-surface-800">
+                        <dt className="text-surface-500 dark:text-surface-400">Business Model</dt>
+                        <dd className="font-semibold text-surface-900 dark:text-white">{report.websiteIntelligence?.businessModel || 'Digital Service'}</dd>
+                      </div>
+                      <div className="flex justify-between py-1.5 border-b border-surface-100 dark:border-surface-800">
+                        <dt className="text-surface-500 dark:text-surface-400">Commercial Operation</dt>
+                        <dd className="font-semibold text-surface-900 dark:text-white">{report.websiteIntelligence?.isCommercial ? 'Yes (For-Profit Business)' : 'No (Open / Non-profit)'}</dd>
+                      </div>
+                      <div className="flex justify-between py-1.5">
+                        <dt className="text-surface-500 dark:text-surface-400">Primary Audience</dt>
+                        <dd className="font-semibold text-surface-900 dark:text-white text-right max-w-xs">{report.websiteIntelligence?.targetAudience}</dd>
+                      </div>
+                    </dl>
+                  </Card>
+
+                  {/* Positioning & Detected Topics */}
+                  <Card variant="bordered" className="p-6">
+                    <h3 className="text-sm font-bold uppercase tracking-wider text-surface-900 dark:text-white mb-4">
+                      Brand Positioning & Core Topics
+                    </h3>
+                    <div className="space-y-4 text-xs">
+                      <div>
+                        <div className="text-[11px] font-bold text-surface-500 uppercase tracking-wider mb-1">
+                          Official Tagline
+                        </div>
+                        <p className="p-2.5 rounded-lg bg-surface-50 dark:bg-surface-800/60 font-mono text-surface-700 dark:text-surface-300 italic">
+                          "{report.websiteIntelligence?.tagline || report.seo.title}"
+                        </p>
+                      </div>
+
+                      {report.websiteIntelligence?.keyKeywords && report.websiteIntelligence.keyKeywords.length > 0 && (
+                        <div>
+                          <div className="text-[11px] font-bold text-surface-500 uppercase tracking-wider mb-2">
+                            Extracted Primary Headings & Topics
+                          </div>
+                          <div className="flex flex-wrap gap-1.5">
+                            {report.websiteIntelligence.keyKeywords.map((kw, i) => (
+                              <span key={i} className="px-2.5 py-1 rounded-md bg-surface-100 dark:bg-surface-800 text-surface-700 dark:text-surface-300 text-xs border border-surface-200 dark:border-surface-700">
+                                {kw}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      <div className="pt-2 flex items-center gap-2">
+                        <Button 
+                          variant="outline" 
+                          size="sm" 
+                          className="w-full text-xs"
+                          onClick={() => setActiveTab('tech')}
+                        >
+                          View Tech Stack Details →
+                        </Button>
+                        <Button 
+                          variant="outline" 
+                          size="sm" 
+                          className="w-full text-xs"
+                          onClick={() => navigate(`/compare?url1=${encodeURIComponent(report.url)}`)}
+                        >
+                          Compare with Competitor →
+                        </Button>
+                      </div>
+                    </div>
+                  </Card>
                 </div>
               </div>
             )}

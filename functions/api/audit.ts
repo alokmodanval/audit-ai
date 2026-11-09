@@ -394,6 +394,172 @@ export async function onRequestPost(context: any) {
     trustScore = Math.max(15, Math.min(100, trustScore));
     const trustStatus = trustScore >= 80 ? 'Safe' : trustScore >= 50 ? 'Suspicious' : 'High Risk';
 
+    // 14. Website Purpose & Business Intelligence Analyzer
+    let siteName = openGraph?.siteName || '';
+    if (!siteName || siteName === domain) {
+      const rawName = domain.replace(/^www\./, '').split('.')[0];
+      siteName = rawName.charAt(0).toUpperCase() + rawName.slice(1);
+      if (title && !title.toLowerCase().includes('just a moment')) {
+        const parts = title.split(/[|—–•:\-]/).map((p: string) => p.trim());
+        if (parts[0] && parts[0].length >= 2 && parts[0].length <= 30) {
+          siteName = parts[0];
+        }
+      }
+    }
+
+    let siteTagline = h1Matches.length > 0 ? h1Matches[0] : '';
+    if (!siteTagline || siteTagline === siteName) {
+      if (metaDescription) {
+        siteTagline = metaDescription.split('.')[0] + '.';
+      } else {
+        siteTagline = `Official web platform for ${domain}`;
+      }
+    }
+
+    const cleanSemanticText = `${title} ${metaDescription} ${h1Matches.join(' ')} ${openGraph?.description || ''} ${openGraph?.title || ''}`.toLowerCase();
+    const hasTerm = (terms: string[]) => terms.some(t => {
+      const regex = new RegExp(`(^|[^a-zA-Z0-9])${t}([^a-zA-Z0-9]|$)`, 'i');
+      return regex.test(cleanSemanticText);
+    });
+
+    let category = 'Digital Web Platform';
+    let primaryNiche = 'Technology & Web';
+    let targetAudience = 'General internet users and web visitors';
+    let businessModel = 'Free Online Service';
+    let isCommercial = false;
+    let coreOfferings: string[] = [];
+
+    if (
+      domain.includes('stripe') ||
+      domain.includes('paypal') ||
+      domain.includes('razorpay') ||
+      hasTerm(['payment', 'payments', 'financial infrastructure', 'billing', 'fintech', 'payouts', 'credit card processing'])
+    ) {
+      category = 'Fintech & Payment Gateway Infrastructure';
+      primaryNiche = 'Financial Technology & Billing';
+      targetAudience = 'Online merchants, SaaS businesses, startups, and enterprise finance teams';
+      businessModel = 'Transaction Fees & Payment Interchange Margins';
+      isCommercial = true;
+      coreOfferings = ['Global Payment Processing API', 'Subscription Billing Engine', 'Fraud Detection & Risk Radar', 'Multi-currency Payouts'];
+    } else if (
+      domain.includes('github') ||
+      domain.includes('gitlab') ||
+      domain.includes('bitbucket') ||
+      hasTerm(['git repository', 'pull request', 'open source software', 'version control', 'code hosting', 'code collaboration'])
+    ) {
+      category = 'Developer Platform & Code Collaboration';
+      primaryNiche = 'Software Development & DevOps';
+      targetAudience = 'Software engineers, DevOps leads, open-source contributors, and tech teams';
+      businessModel = 'Developer Freemium / Enterprise Software Licensing';
+      isCommercial = true;
+      coreOfferings = ['Git Version Control & Code Hosting', 'CI/CD Automation Pipelines', 'Issue Tracking & Discussions', 'Open Source Package Registry'];
+    } else if (
+      domain.includes('wikipedia') ||
+      hasTerm(['encyclopedia', 'free encyclopedia', 'wiki encyclopedia', 'free knowledge', 'reference work'])
+    ) {
+      category = 'Knowledge Base & Encyclopedia';
+      primaryNiche = 'Open Education & Reference';
+      targetAudience = 'Students, researchers, academics, and curious learners worldwide';
+      businessModel = 'Non-Profit / Free Open Access / Community Donations';
+      isCommercial = false;
+      coreOfferings = ['Multilingual Reference Articles', 'Crowdsourced Peer Knowledge', 'Open Documentation', 'Citation & Academic References'];
+    } else if (
+      cms.includes('Shopify') ||
+      cms.includes('WooCommerce') ||
+      hasTerm(['add to cart', 'checkout', 'free shipping', 'shop now', 'cart', 'buy online', 'order now', 'ecommerce', 'shopping cart'])
+    ) {
+      category = 'E-Commerce & Online Store';
+      primaryNiche = 'Retail & Digital Shopping';
+      targetAudience = 'Online consumers, shoppers, and retail customers';
+      businessModel = 'Direct-to-Consumer (D2C) / Retail Sales';
+      isCommercial = true;
+      coreOfferings = ['Online Product Catalog', 'Secure Digital Checkout', 'Order Tracking & Delivery', 'Customer Shopping Cart'];
+    } else if (
+      hasTerm(['saas', 'dashboard', 'start free trial', 'schedule a demo', 'pricing plans', 'automate workflow', 'all-in-one platform'])
+    ) {
+      category = 'SaaS & Cloud Software Platform';
+      primaryNiche = 'B2B Software & Productivity';
+      targetAudience = 'Businesses, remote teams, digital creators, and project managers';
+      businessModel = 'Subscription-based SaaS (Monthly/Annual Tiers)';
+      isCommercial = true;
+      coreOfferings = ['Cloud Management Dashboard', 'Automated Team Workflows', 'API & Integration Hub', 'Analytics & Reporting Tools'];
+    } else if (
+      hasTerm(['breaking news', 'journalism', 'editorial', 'latest headlines', 'world news', 'politics', 'press release'])
+    ) {
+      category = 'News & Digital Media Publication';
+      primaryNiche = 'Media, News & Current Affairs';
+      targetAudience = 'Informed citizens, news readers, policy makers, and media consumers';
+      businessModel = 'Digital Subscriptions & Online Advertising';
+      isCommercial = true;
+      coreOfferings = ['Live News Coverage', 'Investigative Editorial Columns', 'Multimedia Audio & Video', 'Opinion & Analysis Pieces'];
+    } else if (
+      hasTerm(['online courses', 'learning platform', 'interactive tutorial', 'certifications', 'student portal', 'academy'])
+    ) {
+      category = 'EdTech & Online Education';
+      primaryNiche = 'Education & Career Training';
+      targetAudience = 'Students, upskilling professionals, and lifelong learners';
+      businessModel = 'Course Purchases / Educational Memberships';
+      isCommercial = true;
+      coreOfferings = ['Curated Video Modules', 'Skill Assessments & Quizzes', 'Accredited Certificates', 'Mentorship Support'];
+    } else if (
+      hasTerm(['community forum', 'threads', 'upvote', 'discussion board', 'user questions', 'forum topics'])
+    ) {
+      category = 'Community Discussion & Forum';
+      primaryNiche = 'Social & Community Engagement';
+      targetAudience = 'Specialized topic enthusiasts, communities, and digital peers';
+      businessModel = 'Ad-Supported / Community Sponsorships';
+      isCommercial = false;
+      coreOfferings = ['Community Discussion Boards', 'Peer Question & Answer Threads', 'Reputation & Karma Systems', 'User Profile Networking'];
+    } else if (
+      hasTerm(['digital agency', 'our portfolio', 'our case studies', 'client reviews', 'contact us for a quote', 'consulting services'])
+    ) {
+      category = 'Creative Agency & Professional Consulting';
+      primaryNiche = 'Professional Services & Design';
+      targetAudience = 'Brand founders, marketing directors, and enterprise clients';
+      businessModel = 'Contract Retainers & Client Project Fees';
+      isCommercial = true;
+      coreOfferings = ['Custom Web & Product Design', 'Brand Strategy & Marketing', 'Technical Consulting', 'Dedicated Client Support'];
+    } else if (
+      hasTerm(['artificial intelligence', 'large language model', 'chat with ai', 'ai prompts', 'neural network', 'generate images'])
+    ) {
+      category = 'Artificial Intelligence & Generative Tool';
+      primaryNiche = 'AI & Machine Learning';
+      targetAudience = 'Developers, content creators, researchers, and AI adopters';
+      businessModel = 'API Usage / Subscription Pro Tiers';
+      isCommercial = true;
+      coreOfferings = ['AI-Powered Text & Image Generation', 'Interactive AI Conversational Agent', 'Developer API Endpoints', 'Automated Prompt Workflows'];
+    } else {
+      coreOfferings = ['Informational Content & Resources', 'Interactive Web Interfaces', 'Cross-Platform Compatibility', 'Secure User Navigation'];
+    }
+
+    let whatItDoes = '';
+    if (metaDescription && metaDescription.length > 30) {
+      const cleanDesc = metaDescription.trim();
+      whatItDoes = `${siteName} is an established ${category.toLowerCase()}. Its primary function: ${cleanDesc}`;
+      if (!whatItDoes.endsWith('.')) whatItDoes += '.';
+    } else if (siteTagline && siteTagline.length > 15) {
+      whatItDoes = `${siteName} is a dedicated ${category.toLowerCase()} designed to ${siteTagline.toLowerCase()}`;
+      if (!whatItDoes.endsWith('.')) whatItDoes += '.';
+    } else {
+      whatItDoes = `${siteName} (${domain}) is an active web platform categorized under ${category}. It delivers specialized digital services, content, and interactive capabilities focused on ${primaryNiche.toLowerCase()}.`;
+    }
+
+    const siteSummary = `${siteName} is an active ${category.toLowerCase()} primarily serving ${targetAudience.toLowerCase()} through a ${businessModel.toLowerCase()} model.`;
+
+    const websiteIntelligence = {
+      name: siteName,
+      tagline: siteTagline,
+      category,
+      summary: siteSummary,
+      whatItDoes,
+      targetAudience,
+      businessModel,
+      coreOfferings,
+      primaryNiche,
+      isCommercial,
+      keyKeywords: h1Matches.slice(0, 5),
+    };
+
     return new Response(
       JSON.stringify({
         success: true,
@@ -473,6 +639,7 @@ export async function onRequestPost(context: any) {
             cleanerThanPercent: Math.max(45, 96 - Math.round((pageSizeKb / 2500) * 40)),
             isGreenHost: isHttps && isWellKnown,
           },
+          websiteIntelligence,
           fetchError,
         },
       }),

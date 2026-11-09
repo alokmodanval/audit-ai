@@ -130,6 +130,20 @@ export interface AiDoctorData {
   quickWins: string[];
 }
 
+export interface WebsiteIntelligence {
+  name: string;
+  tagline: string;
+  category: string;
+  summary: string;
+  whatItDoes: string;
+  targetAudience: string;
+  businessModel: string;
+  coreOfferings: string[];
+  primaryNiche: string;
+  isCommercial: boolean;
+  keyKeywords: string[];
+}
+
 export interface FullAuditReport {
   id: string;
   url: string;
@@ -145,4 +159,5 @@ export interface FullAuditReport {
   techStack: TechStackData;
   carbon: CarbonData;
   aiDoctor: AiDoctorData;
+  websiteIntelligence: WebsiteIntelligence;
 }
