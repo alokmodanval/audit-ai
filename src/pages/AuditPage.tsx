@@ -13,6 +13,8 @@ import { runWebsiteAudit, normalizeUrl } from '@/services/auditEngine';
 import { historyStorage } from '@/services/historyStorage';
 import { FullAuditReport, AuditMetric } from '@/types/audit';
 import WebsiteIntelligenceCard from '@/components/audit/WebsiteIntelligenceCard';
+import MonetizationBanner from '@/components/audit/MonetizationBanner';
+import { triggerSmartLink } from '@/config/monetization';
 
 const AuditPage: React.FC = () => {
   const { t } = useTranslation();
@@ -74,6 +76,7 @@ const AuditPage: React.FC = () => {
   };
 
   const printReport = () => {
+    triggerSmartLink();
     window.print();
   };
 
@@ -156,6 +159,14 @@ const AuditPage: React.FC = () => {
 
                 {/* Actions */}
                 <div className="flex flex-wrap items-center gap-2 print:hidden">
+                  <Button
+                    variant="primary"
+                    size="sm"
+                    className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-semibold shadow-xs cursor-pointer"
+                    onClick={() => triggerSmartLink()}
+                  >
+                    ⚡ Auto-Fix Issues
+                  </Button>
                   <Button variant="outline" size="sm" onClick={() => setShareModalOpen(true)}>
                     <svg className="w-4 h-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
@@ -228,6 +239,12 @@ const AuditPage: React.FC = () => {
                     domain={report.domain} 
                   />
                 )}
+
+                {/* Monetag High-Converting SmartLink Banner */}
+                <MonetizationBanner
+                  score={report.overallScore}
+                  onDownloadReport={printReport}
+                />
 
                 {/* AI Executive Diagnosis */}
                 <Card variant="bordered" className="p-6 bg-gradient-to-br from-primary-500/10 via-surface-50 to-transparent dark:from-primary-950/40 dark:via-surface-900 dark:to-transparent border-primary-500/30">

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://audit-ai.tools4genz.com/sitemap.xml

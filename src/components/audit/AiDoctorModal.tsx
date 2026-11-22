@@ -3,6 +3,7 @@ import Modal from '@/components/ui/Modal';
 import Button from '@/components/ui/Button';
 import Badge from '@/components/ui/Badge';
 import { AuditMetric } from '@/types/audit';
+import { triggerSmartLink } from '@/config/monetization';
 
 interface AiDoctorModalProps {
   isOpen: boolean;
@@ -93,15 +94,25 @@ const AiDoctorModal: React.FC<AiDoctorModalProps> = ({ isOpen, onClose, metric }
         )}
 
         {/* Modal footer */}
-        <div className="pt-4 border-t border-surface-200 dark:border-surface-800 flex justify-end gap-3">
-          <Button variant="outline" size="sm" onClick={onClose}>
-            Close
+        <div className="pt-4 border-t border-surface-200 dark:border-surface-800 flex flex-wrap items-center justify-between gap-3">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => triggerSmartLink()}
+            className="text-xs text-primary-600 dark:text-primary-400 font-semibold hover:bg-primary-50 dark:hover:bg-primary-950/40 cursor-pointer"
+          >
+            ⚡ Need 1-Click Fix? Try Cloud Optimizer ↗
           </Button>
-          {metric.fixSnippet && (
-            <Button variant="primary" size="sm" onClick={copySnippet}>
-              {copied ? 'Copied!' : 'Copy Code Fix'}
+          <div className="flex items-center gap-2">
+            <Button variant="outline" size="sm" onClick={onClose}>
+              Close
             </Button>
-          )}
+            {metric.fixSnippet && (
+              <Button variant="primary" size="sm" onClick={copySnippet}>
+                {copied ? 'Copied!' : 'Copy Code Fix'}
+              </Button>
+            )}
+          </div>
         </div>
       </div>
     </Modal>
